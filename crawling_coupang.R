@@ -9,11 +9,6 @@ library(rvest)
 library(RCurl)
 library(httr)
 
-mainDir <- "~/Desktop"
-subDir <- "output"
-
-dir.create(file.path(mainDir, subDir))
-setwd(file.path(mainDir, subDir))
 
 # Crawling Beauty
 b_id<-c(108460,108462,108464,108480,108494,108506,108514,108516,108524,108531,108539,108543,108545,108564,108581,126686,126687,108636,
@@ -53,7 +48,6 @@ for(j in 1:nrow(beauty))
     purchased<-gsub(remove2,"",purchased)
     category <-beauty$b_name[j]
     date<-Sys.Date()
-    time<-Sys.time()
     source<-"Coupang Top 100"
     bestitems<-cbind(item_nm,price,rating,rate_cnt,purchased,category,date,time,source)
     bestitems<-as.data.frame(bestitems)
@@ -64,6 +58,6 @@ for(j in 1:nrow(beauty))
 }
 
 
+
 write.csv(result,paste0("coupang_result_",Sys.Date(),".csv"),row.names = FALSE)
 
-quit(save="no")
